@@ -1,0 +1,165 @@
+*
+/*
+{
+   margin: 0;
+   padding: 0;
+   box-sizing: border-box;
+  }
+  body{
+   font-family: sans-serif;
+  }
+
+p{
+     margin: 20px 0;
+}
+  a:link,
+  a:visited{
+   text-decoration: none;
+  }
+*/
+.body {
+  background: url(../images/bg.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;  
+}
+
+.body1 {
+  background: url(../images/bg1.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;  
+}
+.body2 {
+  background: url(../images/bg2.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;  
+}
+.body3 {
+  background: url(../images/bg3.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;  
+}
+.body4 {
+  background: url(../images/bg4.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;  
+}
+.body5 {
+  background: url(../images/bg5.jpg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;  
+}
+
+  .modal{
+   background-color: rgba(0,0,0, .8);
+   width:100%;
+   height: 100vh;
+   position: absolute;
+   top: 0;
+   left: 0;
+   z-index: 10;
+   opacity: 0;
+   visibility: hidden;
+   transition: all .5s;
+  }
+  .modal__content{
+   width: 75%;
+   height: 65%;
+   background-color: #fff;
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   padding: 2em;
+   border-radius: 1em;
+   opacity: 0;
+   visibility: hidden;
+   transition: all .5s;
+       overflow: hidden;
+       text-overflow: ellipsis;
+       
+  }
+  #modal:target{
+   opacity: 1;
+   visibility: visible;
+  }
+  #modal:target .modal__content{
+   opacity: 1;
+   visibility: visible;
+  }
+  .modal__close{
+   color: #363636;
+   font-size: 2em;
+   position: absolute;
+   top: .5em;
+   right: 1em;
+  }
+  .modal__heading{
+   color: dodgerblue;
+   margin-bottom: 1em;
+  }
+  .modal__paragraph{
+   line-height: 1.5em;
+  }
+.modal-open{
+ display: inline-block;
+ color: dodgerblue;
+ margin: 2em;
+}
+
+.box-random {
+  width:130px; height: 88px; padding:5px; text-align: center; background-color: #0056ff; color:#ffffff; 
+  border:2px solid #f68b1f; margin:5px; float: left; border-radius: 8px; font-weight: 600; font-size: 16px;padding:8px;
+}
+.box-random:hover {
+  background-color: #f68b1f; cursor: pointer;
+}
+.txt-display {
+  color:#ddd; font-size:22px; text-align: center;
+  text-shadow: 0px -1px 0px #fff, 1px 2px 0 #222;
+}
+.box-mp3 {
+  border:5px solid #0056ff; border-radius: 5px; background-color: #fff;
+  width:60px; height: 60px; text-align: center; padding-bottom: 5px
+}
+.box-mp3:hover { 
+  border:5px solid #f68b1f;
+}
+.boxitem {
+  width:200px; padding:10px 20px;background-color: #0056ff; border-radius: 5px; color:fff; 
+}
+.boxgift {
+  width:80px; height:80px; background-color: #f68b1f; float: right; margin:5px; border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  border:3px solid #ffffff;
+}
+.boxgift:hover {
+  background-color: #0056ff; cursor: pointer;
+}
+.boxgiftEnd {
+  width:80px; height:80px; background-color: #0056ff; float: right; margin:5px; border-radius: 5px;
+  box-shadow: 0 3px 6px rgba(0,0,0,0.16), 0 3px 6px rgba(0,0,0,0.23);
+  border:3px solid #ffffff;
+}
+.text-header {
+  text-align: center; font-weight: 600; color:#fff; font-size: 34px; padding:20px;
+}
+.box-RH {
+  font-size: 16px;text-align: center;margin-top:-100px; color:#ffffff;
+  /*padding:6px 30px; border:2px solid #002d63; border-radius: 15px; margin-right: 0;*/
+}
+.box-RH1 {
+  font-size: 13px;text-align: center;margin-top:0px; color:#f68b1f;
+  /*padding:6px 30px; border:2px solid #002d63; border-radius: 15px; margin-right: 0;*/
+}
