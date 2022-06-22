@@ -517,13 +517,13 @@ function OpenGroup(x) {
     str += '<div style="width:30%;height: 100%;float: right;margin-top:-180px;overflow: hidden;">';
     str += '<div><img src="./images/RH'+x+'.png" style="width:100%;"></div>';
     if(x==1) {
-      str += '<div class="box-RH">เอกวิทย์ ภู่สุวรรณ์</div>';
+      str += '<div class="box-RH">พีรชัย คชะสุต</div>';
     } else if(x==2) { 
       str += '<div class="box-RH">สุรีรัตน์ สุวรรณพันธ์</div>';
     } else if(x==3) { 
       str += '<div class="box-RH">บดี ทรัพย์เจริญ</div>';
     } else if(x==4) { 
-      str += '<div class="box-RH">พีรชัย คชะสุต</div>';
+      str += '<div class="box-RH"></div>';
     } else if(x==5) { 
       str += '<div class="box-RH">เวธน์วิภพ ภาสพสิษฐ์</div>';
     } else if(x==6) { 
