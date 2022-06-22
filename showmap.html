@@ -1,9 +1,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
 <!--<link rel="stylesheet" href="./css/TMBStyle.css">-->
+<link href="./images/favicom.ico" rel="icon">
 <link rel="stylesheet" href="./css/button.css">
 <link rel="stylesheet" href="./css/style_count.css">
-<link rel="stylesheet" href="./css/style.css">
+<link rel="stylesheet" href="./css/map.css">
 <link rel="stylesheet" href="./css/ekachon.css">
 <link rel="stylesheet" href='./css/w3.css' type="text/css">
 <!--
@@ -11,6 +12,8 @@
 -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
 
 <style>
   .boxgift.active {
@@ -131,62 +134,52 @@
 
 </head>
 <body class="body" style="height: 100%;overflow: hidden;">
-
-
-
-
   <div class="container">
-<!--
-    <div class="audio-examples-wrap" style="margin-top:20px; ">
-<audio controls autoplay>
-  <source src="random.wav" type="audio/mpeg">
-</audio>
-      <div id="audio1" data-src="http://www.uscis.gov/files/nativedocuments/Track%2093.mp3"></div>
-        <a href="#" class="playSound" data-id="test">
-          <div id="mp3close" onclick="ShowSound(0)" style="display: none;" class="box-mp3"><img src="./mp3/icons8-mute.gif" width="50px"></div>
-          <div id="mp3open" onclick="ShowSound(1)" style="display: none;" class="box-mp3"><img src="./mp3/wave.gif" width="50px"></div>
-        </a>
-      </div>
-      <audio class="audio" id="test" src="./mp3/JingleBells.mp3"></audio>
-    </div>
--->
     <center>
-      <div style="width:100%; margin:60px auto;">
-          <div style="width:100%;position: relative;">
-            <div>
-              <div class="text-header" id="TargetAPE"></div>
-              <div class="js_animation odometer"></div>
-              <form class="odometer_form" action="javascript:void(0);">
-                <div class="guess" style="display: none;">
-                  <input type="number" class="guess__input" id="js-input_control" min="00000" max="99999">
-                  <a href="#" class="guess__clear" id="js-clear_guess">x</a>
-                </div>
-                <center>
-                <div id="js-validate_button" style="margin-top:10px;display:none;font-size: 36px;color:#f68b1f;font-weight: 600;">ล้านบาท</div>
-                </center>
-              </form>
-            </div>
-            <div style="width:100%; text-align: right; margin-top:-250px; height: 90%;">
-              <div id="DisplayRH"></div>
-            </div>     
-            <div style="width:90%;margin-top:30px; ">
-              <div id="DisplayReward"></div>
-            </div>        
+      <div class="clr" style="height: 10px;"></div>
+      <div style="width:80%; margin:auto;">
+        <div class="text-group">ตารางการแบ่งสายการแข่งขัน</div>
+        <div id="GroupList" class="table-all">
+          <div class="table-group">
+            <div class="table-grouphead" style="background-color: #0056ff;">สาย A</div>
+            <div id="DisplayGroup1" class="table-text"></div>
           </div>
-<!--
-
-        <div style="width:50%;float: left;height: 100%;">
-          <div id="DisplayCount" style="margin-top:460px;margin-left: -100px;"></div>
+          <div class="table-group">
+            <div class="table-grouphead" style="background-color: #f68b1f;">สาย B</div>
+            <div id="DisplayGroup2" class="table-text"></div>
+          </div>
+          <div class="table-group">
+            <div class="table-grouphead" style="background-color: #002d63;">สาย C</div>
+            <div id="DisplayGroup3" class="table-text"></div>
+          </div>
+          <div class="table-group">
+            <div class="table-grouphead" style="background-color: #d92400;">สาย D</div>
+            <div id="DisplayGroup4" class="table-text"></div>
+          </div>
+          <div class="table-group">
+            <div class="table-grouphead" style="background-color: #23b701;">สาย E</div>
+            <div id="DisplayGroup5" class="table-text"></div>
+          </div>
+          <div class="table-group">
+            <div class="table-grouphead" style="background-color: #ce0db0;">สาย F</div>
+            <div id="DisplayGroup6" class="table-text"></div>
+          </div>
         </div>
-          <div class="clr" style="height: 20px;"></div>
-        </div>
+        <div id="TimeRedirect" style="color:#fff;"></div>
+        <div class="clr"></div>
       </div>
--->
-      <div class="clr"></div>
-      <!--<div style="margin-top:-10px;padding:28px;font-size:28px;color:#fff;font-weight: 400;"><img src="./images/newyear.png"></div>-->
-
     </center>
+    <div class="audio-examples-wrap" style="margin-top: -70px;position: absolute;">
+      <div id="audio1" data-src="./soundWorldCup.mp3"></div>
+      <a href="#" class="playSound" data-id="test">
+        <div id="mp3close" onclick="ShowSound(0)" style="display: none;" class="box-mp3"><img src="./images/icons8-mute.gif" width="50px"></div>
+        <div id="mp3open" onclick="ShowSound(1)" style="display: none;" class="box-mp3"><img src="./images/wave.gif" width="50px"></div>
+      </a>
+      <audio class="audio" id="test" src="./soundWorldCup.mp3"></audio>
+    </div>
   </div>
+
+<!--
   <div style="width:600px;position: absolute;left:300px;bottom: 15;overflow: hidden;">
     <a href="javascript:playSound('RandomSound');">
     <div class="boxgift" onclick='OpenGroup(6)' id="btnID6"><img src="./images/gift-6.png" style="padding:1px;width:100%;"></div>
@@ -196,49 +189,23 @@
     <div class="boxgift" onclick='OpenGroup(2)' id="btnID2"><img src="./images/gift-2.png" style="padding:1px;width:100%;"></div>
     <div class="boxgift" onclick='OpenGroup(1)' id="btnID1"><img src="./images/gift-1.png" style="padding:1px;width:100%;"></div>
     </a>
-
-
-<!--
-    <div class="boxgift" onclick='window.location.href="random.html"'><img src="./images/gift-0.png" width="100%"></div>
-    <div class="boxgift" onclick='window.location.href="wow.html"'><img src="./images/gift-5.png" width="100%"></div>
-    <div class="boxgift" onclick='window.location.href="cashback.html"'><img src="./images/gift-4.png" width="100%"></div>
-    <div class="boxgift" onclick='window.location.href="iPad.html"'><img src="./images/gift-3.png" width="100%"></div>
-    <div class="boxgift" onclick='window.location.href="TSPport5.html"'><img src="./images/gift-2.png" width="100%"></div>
-    <div class="boxgiftEnd" onclick='window.location.href="iPhone.html"'><img src="./images/gift-1.png" width="100%"></div>
--->
   </div>
 
-
-<!--
-<div id="id01" class="w3-modal w3-animate-opacity">
-  <div class="w3-modal-content w3-card-4" style="background:#0056ff;border-radius: 20px;">
-    <div class="w3-container" style="min-height:300px;padding:24px;width:100%;text-align:center;">
-        <a href="javascript:playSound('RandomSound');">
-        <div style="color:#fff;font-size: 16px; padding:15px;">ขอแสดงความยินดีกับ<br>หมายเลข</div>
-        <div style="width:600px;margin:auto;text-align: center;"><div id="DisplayEmpID"></div></div>
-        <div class="clr" style="height: 20px;"></div>
-        <div class="btn-t2" onclick="CloseAll()">ปิดหน้าต่าง</div>
-        <div class="clr" style="height: 20px;"></div>
-        </a>
-      </center>
+  <div id="id01" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4" style="background:#0056ff;border-radius: 20px;">
+      <div class="w3-container" style="min-height:300px;padding:24px;width:100%;text-align:center;">
+          <a href="javascript:playSound('RandomSound');">
+          <div style="color:#fff;font-size: 16px; padding:15px;">ขอแสดงความยินดีกับ<br>หมายเลข</div>
+          <div style="width:600px;margin:auto;text-align: center;"><div id="DisplayEmpID"></div></div>
+          <div class="clr" style="height: 20px;"></div>
+          <div class="btn-t2" onclick="CloseAll()">ปิดหน้าต่าง</div>
+          <div class="clr" style="height: 20px;"></div>
+          </a>
+        </center>
+      </div>
     </div>
   </div>
-</div>
-
-
-
-<div id="id02" class="w3-modal w3-animate-opacity">
-  <div class="w3-modal-content w3-card-4" style="background:#0056ff;border-radius: 20px;">
-    <div class="w3-container" style="min-height:300px;padding:24px;width:100%;text-align:center;">
-        <div style="color:#fff;font-size: 16px; padding:15px;">เรียกดูข้อมูล</div>
-        <div style="width:600px;margin:auto;text-align: center;"><div id="DisplayShowEmpID"></div></div>
-      </center>
-    </div>
-  </div>
-</div>
 -->
-
-
 
 <script type="text/javascript">
   $("body").on("click", ".playSound", function() {
@@ -264,10 +231,7 @@
   });
 </script>
 
-<audio id="RandomSound" src="./random.mp3" preload="auto"></audio>
 
-<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.0/jquery.min.js'></script>
-<!--<script src='https://codepen.io/jmsbrr/pen/GNwOMx'></script>-->
-<script src='https://cdn.jsdelivr.net/velocity/1.2.2/velocity.min.js'></script>
-<script src="./js/random.js"></script>
+
+<script src="./js/showmap.js"></script>
 </body>

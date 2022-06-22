@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- Theme Made By www.w3schools.com -->
+  <title>LINE Retail Society</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,'script','dataLayer','GTM-PW7HPDW');</script>
+  <link href="./images/favicom.ico" rel="icon">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="https://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
+  <link href='css/ekachon.css' rel="stylesheet" type="text/css">
+  <link href='css/style.css' rel="stylesheet" type="text/css">
+  <link href='css/button.css' rel="stylesheet" type="text/css">
+  <!--<link href='css/add.css' rel="stylesheet" type="text/css">-->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
+<!--
+-->
+  <style type="text/css">
+    .w3-container, .w3-panel {
+      padding:0px;
+    }
+    .table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th { 
+      height: 31px; vertical-align:middle; text-align: center; padding:2px;
+    }
+    input { margin:0px; background-color: #ffffff; padding:3px 10px; width:95%; margin:auto; }
+  </style>
+</head>
+
+<body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60" style="background-color: #fff;">
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-PW7HPDW"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+
+  <nav class="navbar navbar-default navbar-fixed-top">
+    <div class="container">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#myPage" onclick="location.href='index.html'" style="font-size: 12px;">LINE Retail Society</a>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main">
+    <!--<div><img src="./img/survey.jpg" style="width:100%;margin-top:50px;max-height: 300px;"></div>-->
+    <div class="container">
+      <!--
+      <center><div class="btn-t33">ประเมินผลกิจกรรม</div></center>
+      <div class="text-team">เมื่อเราได้ทำกิจกรรมหรือภารกิจเสร็จเรียบร้อยแล้ว การประเมินผลก็เป็นส่วนหนึ่งที่จะต้องมาช่วยกันดูว่า มีอะไรที่ดีแล้ว และสามารถทำให้ดีขึ้นไปได้อีก หรือมีอะไรที่จะต้องปรับปรุงเพิ่มเติม โดยเราได้เตรียมตัวเลือกไว้ 5 ตัวเลือก ขอให้ทำการให้คะแนนประเมินผลตามความเป็นจริง</div>
+      -->
+
+
+      <div id="Poll" style="display: block; margin-top:60px;">
+        <center>
+          <div class="btn-t33">ตารางการแบ่งสายการแข่งขัน</div>
+        </center>
+        <div id="DisplayGroup1"></div>
+<!--
+        <table class="table" style="margin-top:15px;">
+          <tbody>
+            <tr>
+              <td class="td-padding" style="width:80%;background-color: #e4e400;">สีเหลือง</td>
+              <td class="td-center td-padding" style="text-align:center;">
+                <input name="Score1" id="t1_pocet" onchange="CheckEid(1,'RSOC-1')" class="loading">
+              </td>
+            </tr>
+            <tr>
+              <td class="td-padding" style="background-color: #18d75a;">สีเขียว</td>
+              <td class="td-center td-padding" style="text-align:center;"><input name="Score2" id="t2_pocet" onchange="CheckEid(2,'RSOC-2')"></td>
+            </tr>
+            <tr>
+              <td class="td-padding" style="background-color: #00b0f0;">สีฟ้า</td>
+              <td class="td-center td-padding" style="text-align:center;"><input name="Score3" id="t3_pocet" onchange="CheckEid(3,'RSOC-3')"></td>
+            </tr>
+            <tr>
+              <td class="td-padding" style="background-color: #ff00ff;">สีชมพู</td>
+              <td class="td-center td-padding" style="text-align:center;"><input name="Score4" id="t4_pocet" onchange="CheckEid(4,'RSOC-4')"></td>
+            </tr>
+            <tr>
+              <td class="td-padding" style="background-color: #ffc000;">สีส้ม</td>
+              <td class="td-center td-padding" style="text-align:center;"><input name="Score5" id="t5_pocet" onchange="CheckEid(5,'RSOC-5')"></td>
+            </tr>
+            <tr>
+              <td class="td-padding" style="background-color:#0000ff;">สีน้ำเงิน</td>
+              <td class="td-center td-padding" style="text-align:center;"><input name="Score6" id="t6_pocet" onchange="CheckEid(6,'RSOC-6')"></td>
+            </tr>
+
+            <tr>
+              <td class="td-padding" style="background-color:#d60093;">สีม่วง</td>
+              <td class="td-center td-padding" style="text-align:center;"><input name="Score7" id="t7_pocet" onchange="CheckEid(7,'RSOC-7')"></td>
+            </tr>
+            <tr>
+              <td class="td-padding" style="background-color:#ff0000;">สีแดง</td>
+              <td class="td-center td-padding" style="text-align:center;"><input name="Score8" id="t8_pocet" onchange="CheckEid(8,'RSOC-8')"></td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="clr"></div>
+      </div>
+-->
+
+    </div>
+  </main>
+
+
+
+  <footer class="container-fluid text-center">
+    <div id="isLoggedIn" style="color:#ffffff;"></div>
+    <a href="#myPage" title="To Top"><span class="glyphicon glyphicon-chevron-up"></span></a>
+    <div class="footer-main">
+      @<span class="footer-font-green">LINE</span> 
+      <span class="footer-font-navi">Retail</span> 
+      <span class="footer-font-blue">So</span><span class="footer-font-org">ciety</span>
+    </div>
+    <!--<div class="clr" style="height: 40px;"></div>-->
+  </footer>
+
+ <script  src="./js/score.js"></script>
+
+</body>
+</html>
