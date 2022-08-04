@@ -39,27 +39,29 @@ function ShowMap() {
   db.where('Group2','!=','')
   .get().then((snapshot)=> {
     snapshot.forEach(doc=> {
-      if(doc.data().Group2=="A") {
+      if(doc.data().Group2=="1") {
         str1 += '<div class="table-groupline1">'+ doc.data().NameZone+' ('+ doc.data().RH +')</div>';
-      } else if(doc.data().Group2=="B") {
+      } else if(doc.data().Group2=="2") {
         str2 += '<div class="table-groupline2">'+ doc.data().NameZone+' ('+ doc.data().RH +')</div>';
-      } else if(doc.data().Group2=="C") {
+      } else if(doc.data().Group2=="3") {
         str3 += '<div class="table-groupline3">'+ doc.data().NameZone+' ('+ doc.data().RH +')</div>';
+        /*
       } else if(doc.data().Group2=="D") {
         str4 += '<div class="table-groupline4">'+ doc.data().NameZone+' ('+ doc.data().RH +')</div>';
       } else if(doc.data().Group2=="E") {
         str5 += '<div class="table-groupline5">'+ doc.data().NameZone+' ('+ doc.data().RH +')</div>';
       } else if(doc.data().Group2=="F") {
         str6 += '<div class="table-groupline6">'+ doc.data().NameZone+' ('+ doc.data().RH +')</div>';
+        */
       }
       console.log(doc.data().NameZone,doc.data().RH);
     });
     $("#DisplayGroup1").html(str1);
     $("#DisplayGroup2").html(str2);
     $("#DisplayGroup3").html(str3);
-    $("#DisplayGroup4").html(str4);
-    $("#DisplayGroup5").html(str5);
-    $("#DisplayGroup6").html(str6);
+    //$("#DisplayGroup4").html(str4);
+    //$("#DisplayGroup5").html(str5);
+    //$("#DisplayGroup6").html(str6);
     });
 }
 
