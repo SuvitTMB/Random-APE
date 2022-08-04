@@ -1,0 +1,241 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+<!--<link rel="stylesheet" href="./css/TMBStyle.css">-->
+<link href="./images/favicom.ico" rel="icon">
+<link rel="stylesheet" href="./css/button.css">
+<link rel="stylesheet" href="./css/style_count.css">
+<link rel="stylesheet" href="./css/map.css">
+<link rel="stylesheet" href="./css/ekachon.css">
+<link rel="stylesheet" href='./css/w3.css' type="text/css">
+<!--
+<link rel="stylesheet" href="./css/bar.css">
+-->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-app.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.5.0/firebase-firestore.js"></script>
+
+<style>
+  .boxgift.active {
+    background-color: #002d63;
+    color: white;
+  }
+
+</style>
+<script type="text/javascript">
+// <![CDATA[
+    var speed=33; // lower number for faster
+    var flakes=100; // number of flakes
+    var colour="#fff"; // colour of flakes
+    var slush=20; // set to '0' for no slush or otherwise set to height at which slush melts
+    var flks=new Array();
+    var flkx=new Array();
+    var flky=new Array();
+    var fldy=new Array();
+    var slss=new Array();
+    var slsh=new Array();
+    var swide, shigh, boddie;
+    window.onload=function() { if (document.getElementById) {
+      boddie=document.createElement("div");
+      boddie.style.position="fixed";
+      boddie.style.top="0px";
+      boddie.style.left="0px";
+      boddie.style.width="1px";
+      boddie.style.height="1px";
+      boddie.style.overflow="visible";
+      boddie.style.backgroundColor="transparent";
+      document.body.appendChild(boddie);
+      set_width();
+      for (var i=0; i<flakes; i++) {
+        flks[i]=createDiv(3, 3, colour);
+        flkx[i]=3*Math.floor(Math.random()*swide/3);
+        flky[i]=Math.floor(Math.random()*shigh);
+        fldy[i]=2+Math.floor(Math.random()*4);
+        flks[i].style.left=flkx[i]+"px";
+        flks[i].style.top=flky[i]+"px";
+        boddie.appendChild(flks[i]);
+      }
+      setInterval("let_it_snow()", speed);
+    }}
+    function createDiv(height, width, colour) {
+      var div=document.createElement("div");
+      div.style.position="absolute";
+      div.style.height=height+"px";
+      div.style.width=width+"px";
+      div.style.overflow="hidden";
+      div.style.backgroundColor=colour;
+      return (div);
+    }
+    window.onresize=set_width;
+    function set_width() {
+      var sw_min=999999;
+      var sh_min=999999;
+      if (document.documentElement && document.documentElement.clientWidth) {
+        if (document.documentElement.clientWidth>0) sw_min=document.documentElement.clientWidth;
+        if (document.documentElement.clientHeight>0) sh_min=document.documentElement.clientHeight;
+      }
+      if (typeof(self.innerWidth)!="undefined" && self.innerWidth) {
+        if (self.innerWidth>0 && self.innerWidth<sw_min) sw_min=self.innerWidth;
+        if (self.innerHeight>0 && self.innerHeight<sh_min) sh_min=self.innerHeight;
+      }
+      if (document.body.clientWidth) {
+        if (document.body.clientWidth>0 && document.body.clientWidth<sw_min) sw_min=document.body.clientWidth;
+        if (document.body.clientHeight>0 && document.body.clientHeight<sh_min) sh_min=document.body.clientHeight;
+      }
+      if (sw_min==999999 || sh_min==999999) {
+        sw_min=800;
+        sh_min=600;
+      }
+      swide=sw_min-3;
+      shigh=sh_min;
+      if (slush) {
+        if (swide/3>slss.length) for (i=slss.length; i<swide/3; i++) {
+          if (!slsh[i]) slsh[i]=3;
+          slss[i]=createDiv(slsh[i], 3, colour);
+          boddie.appendChild(slss[i]);
+        }
+        for (i=0; i<swide/3; i++) {
+          slss[i].style.height=slsh[i]+"px";
+          slss[i].style.top=shigh-slsh[i]+"px";
+          slss[i].style.left=3*i+"px";
+        }
+        if (i<slss.length && slss[i].style.left!="-3px") for (; i<slss.length; i++) slss[i].style.left="-3px";
+      }
+    }
+    function let_it_snow(c) {
+      var i, x, o=0, z=0;
+      for (i=0; i<flakes; i++) {
+        flky[i]+=fldy[i];
+     x=Math.floor(flkx[i]/3);
+        if (slush) {
+          o+=slsh[x];
+          if (flky[i]>=shigh-slsh[x]) {
+            if (x<swide && slsh[x]>slsh[x+1]+3) x++;
+            else if (x>0 && slsh[x]>slsh[x-1]+3) x--;
+            slss[x].style.top=shigh-(slsh[x]+=3)+"px";
+            slss[x].style.height=slsh[x]+"px";
+      flky[i]=shigh;
+       }
+        }
+        if (flky[i]>=shigh || flkx[i]>swide) {
+       flky[i]=0;
+       fldy[i]=2+Math.floor(Math.random()*4);
+       flkx[i]=3*Math.floor(Math.random()*swide/3);
+       flks[i].style.left=flkx[i]+"px";
+       z++;
+     }
+     flks[i].style.top=flky[i]+"px";
+      }
+      if (o>flakes*slush) for (i=0; i<slsh.length; i++) if (slsh[i]>3) slsh[i]--;
+      if (z || o>flakes*slush) set_width();
+    }
+    // ]]>
+</script>
+
+</head>
+<body class="body" style="height: 100%;overflow: hidden;">
+  <div class="container">
+    <center>
+      <div class="clr" style="height: 10px;"></div>
+      <div style="width:80%; margin:auto;">
+        <div class="text-group">การแบ่งสายการรอบ Semi-Final Knock Out Stage<br>กลุ่ม Champion League</div>
+        <div id="GroupList" class="table-all">
+          <div class="table-group">
+            <div style="margin:30px auto;"><img src="./images/Champion-1.png" style="height: 60px;"></div>
+            <div id="DisplayGroup1" class="table-text"></div>
+          </div>
+          <div class="table-group">
+            <div style="margin:30px auto;"><img src="./images/Champion-2.png" style="height: 60px;"></div>
+            <div id="DisplayGroup2" class="table-text"></div>
+          </div>
+          <div class="table-group">
+            <div style="margin:30px auto;"><img src="./images/Champion-3.png" style="height: 60px;"></div>
+            <div id="DisplayGroup3" class="table-text"></div>
+          </div>
+<!--
+          <div class="table-group">
+            <div><img src="./images/g4.png" style="height: 60px;"></div>
+            <div id="DisplayGroup4" class="table-text"></div>
+          </div>
+          <div class="table-group">
+            <div><img src="./images/g5.png" style="height: 60px;"></div>
+            <div id="DisplayGroup5" class="table-text"></div>
+          </div>
+          <div class="table-group">
+            <div><img src="./images/g6.png" style="height: 60px;"></div>
+            <div id="DisplayGroup6" class="table-text"></div>
+          </div>
+-->
+        </div>
+        <div id="TimeRedirect" style="color:#fff;"></div>
+        <div class="clr"></div>
+      </div>
+    </center>
+    <div class="audio-examples-wrap" style="margin-top: -70px;position: absolute;">
+      <!--<div id="audio1" data-src="./soundWorldCup.mp3"></div>-->
+      <div id="audio1" data-src="./FinalCountdown.mp3"></div>
+      <a href="#" class="playSound" data-id="test">
+        <div id="mp3close" onclick="ShowSound(0)" style="display: none;" class="box-mp3"><img src="./images/icons8-mute.gif" width="50px"></div>
+        <div id="mp3open" onclick="ShowSound(1)" style="display: none;" class="box-mp3"><img src="./images/wave.gif" width="50px"></div>
+      </a>
+      <!--<audio class="audio" id="test" src="./soundWorldCup.mp3"></audio>-->
+      <audio class="audio" id="test" src="./FinalCountdown.mp3"></audio>
+    </div>
+  </div>
+
+<!--
+  <div style="width:600px;position: absolute;left:300px;bottom: 15;overflow: hidden;">
+    <a href="javascript:playSound('RandomSound');">
+    <div class="boxgift" onclick='OpenGroup(6)' id="btnID6"><img src="./images/gift-6.png" style="padding:1px;width:100%;"></div>
+    <div class="boxgift" onclick='OpenGroup(5)' id="btnID5"><img src="./images/gift-5.png" style="padding:1px;width:100%;"></div>
+    <div class="boxgift" onclick='OpenGroup(4)' id="btnID4"><img src="./images/gift-4.png" style="padding:1px;width:100%;"></div>
+    <div class="boxgift" onclick='OpenGroup(3)' id="btnID3"><img src="./images/gift-3.png" style="padding:1px;width:100%;"></div>
+    <div class="boxgift" onclick='OpenGroup(2)' id="btnID2"><img src="./images/gift-2.png" style="padding:1px;width:100%;"></div>
+    <div class="boxgift" onclick='OpenGroup(1)' id="btnID1"><img src="./images/gift-1.png" style="padding:1px;width:100%;"></div>
+    </a>
+  </div>
+
+  <div id="id01" class="w3-modal w3-animate-opacity">
+    <div class="w3-modal-content w3-card-4" style="background:#0056ff;border-radius: 20px;">
+      <div class="w3-container" style="min-height:300px;padding:24px;width:100%;text-align:center;">
+          <a href="javascript:playSound('RandomSound');">
+          <div style="color:#fff;font-size: 16px; padding:15px;">ขอแสดงความยินดีกับ<br>หมายเลข</div>
+          <div style="width:600px;margin:auto;text-align: center;"><div id="DisplayEmpID"></div></div>
+          <div class="clr" style="height: 20px;"></div>
+          <div class="btn-t2" onclick="CloseAll()">ปิดหน้าต่าง</div>
+          <div class="clr" style="height: 20px;"></div>
+          </a>
+        </center>
+      </div>
+    </div>
+  </div>
+-->
+
+<script type="text/javascript">
+  $("body").on("click", ".playSound", function() {
+    
+    $('audio').each(function(){
+        this.pause(); // Stop playing
+        this.currentTime = 0; // Reset time
+    }); 
+
+    $('.audio-examples-wrap').find('button').removeClass('stopSound is-selected').addClass('playSound')
+    $(this).addClass('stopSound is-selected').removeClass('playSound')
+      var id = $(this).attr('data-id')
+      document.getElementById(id).play();
+  });
+
+
+  $("body").on("click", ".stopSound", function() {
+    $(this).addClass('playSound').removeClass('stopSound')
+
+    var id = $(this).attr('data-id')
+    document.getElementById(id).pause()  
+    document.getElementById(id).currentTime = 0;
+  });
+</script>
+
+
+
+<script src="./js/showmap-round2A.js"></script>
+</body>
